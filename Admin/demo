@@ -1,0 +1,81 @@
+<?php
+session_start();
+include('db_config.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Escape user inputs for security
+    $room_name = $conn->real_escape_string($_POST['room_name']);
+    $description = $conn->real_escape_string($_POST['descriptions']); // Corrected column name
+    $image = $_FILES['image']['name'];
+    $price = $conn->real_escape_string($_POST['price']);
+    $features = $conn->real_escape_string($_POST['features']);
+    $area = $conn->real_escape_string($_POST['area']);
+    $quantity = $conn->real_escape_string($_POST['quantity']);
+    $adult = $conn->real_escape_string($_POST['adult']);
+    $child = $conn->real_escape_string($_POST['child']);
+
+    // Image upload path
+    $target_dir = "images/rooms/";
+    $target_file = $target_dir . basename($image);
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+
+    // Insert query
+    $sql = "INSERT INTO rooms (room_name, descriptions, image, price, features, area, quantity, adult, child) 
+            VALUES ('$room_name', '$description', '$target_file', '$price', '$features', '$area', '$quantity', '$adult', '$child')";
+
+    if ($conn->query($sql) === TRUE) {
+        header("Location: rooms.php?success=1");
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
+
+
+//edit for rooms add options
+<?php
+session_start();
+include('db_config.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Escape user inputs for security
+    $room_name = $conn->real_escape_string($_POST['room_name']);
+    $description = $conn->real_escape_string($_POST['descriptions']); // Corrected column name
+    $image = $_FILES['image']['name'];
+    $price = $conn->real_escape_string($_POST['price']);
+    $features = $conn->real_escape_string($_POST['features']);
+    $area = $conn->real_escape_string($_POST['area']);
+    $quantity = $conn->real_escape_string($_POST['quantity']);
+    $adult = $conn->real_escape_string($_POST['adult']);
+    $child = $conn->real_escape_string($_POST['child']);
+
+    // Image upload path
+    $target_dir = "images/rooms/";
+    $target_file = $target_dir . basename($image);
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+
+    // Insert query
+    $sql = "INSERT INTO rooms (room_name, descriptions, image, price, features, area, quantity, adult, child) 
+            VALUES ('$room_name', '$description', '$target_file', '$price', '$features', '$area', '$quantity', '$adult', '$child')";
+
+    if ($conn->query($sql) === TRUE) {
+        header("Location: rooms.php?success=1");
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
+
+            <!-- <div class="form-group">
+                                <label>Features</label><br>
+                                <?php while ($row = $result_features->fetch_assoc()) : ?>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="features" id="feature_<?php echo $row['features_id']; ?>" value="<?php echo $row['features_id']; ?>" required>
+                                        <label class="form-check-label" for="feature_<?php echo $row['features_id']; ?>"><?php echo $row['name']; ?></label>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div> -->
