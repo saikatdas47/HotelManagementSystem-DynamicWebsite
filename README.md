@@ -10,8 +10,8 @@ The hotel management system is built using a combination of modern web technolog
 
 These technologies together create a robust and efficient hotel management system that caters to the needs of users, admins, and guests effectively.
 
-## YouTube Video
-[![Watch the video](https://img.youtube.com/vi/NRjADqyfCrw/0.jpg)](https://youtu.be/NRjADqyfCrw?feature=shared)
+## YouTube Video : https://youtu.be/NRjADqyfCrw?feature=shared
+
 
 ## Screenshots
 
